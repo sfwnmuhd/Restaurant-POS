@@ -4,13 +4,19 @@ const connectDB = require("./config/databse.js");
 const config = require("./config/config.js");
 const globalErrorHandler = require("./middlewares/globalErrorHandler.js");
 const cookieParser = require("cookie-parser");
+const cors = require("cors")
 
 const app = express();
 connectDB();
 
 // Middlewares
+app.use(cors({
+    credentials: true,
+    origin: ['http://localhost:5173']
+}))
 app.use(express.json()); // parse incoming request in json format
 app.use(cookieParser())
+
 
 const PORT = config.port;
 

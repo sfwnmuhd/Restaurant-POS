@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
+import { register } from '../../https';
+import { useMutation } from '@tanstack/react-query';
+import { enqueueSnackbar } from 'notistack';
+import { useNavigate } from 'react-router-dom';
 
-const Register = () => {
+const Register = ({setIsRegister}) => {
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         name: "",
@@ -20,8 +25,35 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData);
+        registerMutation.mutate(formData);
     }
+
+    const registerMutation = useMutation({
+            mutationFn: (reqData) => register(reqData),
+            onSuccess: (res) => {
+                const {data} = res;
+                enqueueSnackbar(data.message, {variant: "success"});
+                setFormData({
+                    name: "",
+                    email: "",
+                    phone: "",
+                    password: "",
+                    role: ""
+                })
+                
+                setTimeout(()=>{
+                    setIsRegister(false);
+                },1500)
+                navigate('/auth');
+                
+            },
+            onError: (error) => {
+                const {response} = error;
+                enqueueSnackbar(response.data.message, {variant: "error"});
+            }
+        })
+
+
   return (
     <div>
         <form onSubmit={handleSubmit}>
