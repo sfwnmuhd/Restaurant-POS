@@ -17,7 +17,7 @@ const Header = () => {
         mutationFn: () => logout(),
         onSuccess: (data) => {
             console.log(data);
-            dispatch(removeUser())
+            dispatch(removeUser)
             navigate('/auth');
             
         },
@@ -32,8 +32,8 @@ const Header = () => {
   return (
     <header className="flex justify-between items-center py-4 px-8 bg-[#1a1a1a]">
         {/* logo */}
-        <div className="flex items-center gap-2">
-            <img src={logo} alt="restro logo" className="h-8 w-8" />
+        <div onClick={() => navigate('/')} className="flex items-center gap-2 cursor-pointer">
+            <img src={logo} alt="restro logo" className="h-8 w-8 " />
             <h1 className="text-lg font-semibold text-[#f5f5f5]" >Restro</h1>
         </div>
         {/* search */}

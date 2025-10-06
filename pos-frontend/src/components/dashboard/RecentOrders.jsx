@@ -3,6 +3,9 @@ import { orders } from '../../constants';
 import { GrUpdate } from 'react-icons/gr';
 
 const RecentOrders = () => {
+  const handleStatusChange = () => {
+
+  }
   return (
     <div className="container mx-auto bg-[#262626] p-4 rounded-lg">
       <h2 className="text-[#f5f5f5] text-xl font-semibold mb-4">

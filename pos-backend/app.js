@@ -30,6 +30,7 @@ app.get("/", (req,res) => {
 app.use("/api/user", require("./routes/userRoute.js"));
 app.use("/api/order", require("./routes/orderRoute.js"));
 app.use("/api/table", require("./routes/tableRoute.js"))
+app.use("/api/payment", require("./routes/paymentRouter.js"))
 
 // Global Error Handler
 
